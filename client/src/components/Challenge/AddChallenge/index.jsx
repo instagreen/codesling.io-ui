@@ -4,6 +4,7 @@ import axios from 'axios';
 import Input from '../../globals/forms/Input';
 import Button from '../../globals/Button/';
 import Logo from '../../globals/Logo';
+import Dropdown from '../../globals/forms/Dropdown'
 
 import './Auth.css';
 
@@ -14,6 +15,7 @@ class AddChallenge extends Component {
     difficulty: null,
     input: '',
     output: '',
+    difficulty: 0, // 1 by default (Easy)
    }
 
   submitChallenge = async (e) => {
@@ -57,7 +59,7 @@ class AddChallenge extends Component {
             placeholder={'enter content'}
             onChange={this.handleChallengeInput}
             />
-          <Input 
+          <Dropdown 
             name='difficulty'
             type='difficulty'
             placeholder={'enter your difficulty'}
