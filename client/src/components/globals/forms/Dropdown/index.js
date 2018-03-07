@@ -9,7 +9,6 @@ const Dropdown = ({
 }) => {
   return (
     <div>
-      {placeholder}
       <select
         onChange={onChange}
         placeholder={placeholder}
