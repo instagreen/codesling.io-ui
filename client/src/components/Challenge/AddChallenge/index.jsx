@@ -12,6 +12,7 @@ class AddChallenge extends Component {
   state = { 
     title: '',
     content: '',
+
     difficulty: null,
     input: '',
     output: '',
