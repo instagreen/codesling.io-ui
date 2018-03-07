@@ -11,17 +11,21 @@ class AddChallenge extends Component {
   state = { 
     title: '',
     content: '',
-    difficulty: null
+    difficulty: null,
+    input: '',
+    output: '',
    }
 
   submitChallenge = async (e) => {
     e.preventDefault();
-    const { title, content, difficulty } = this.state;
+    const { title, content, difficulty, input, output } = this.state;
     const id = localStorage.getItem('id');
     const body = {
       title,
       content,
       difficulty,
+      input,
+      output,
       user_id: id,
       type: 0
     }
@@ -59,6 +63,18 @@ class AddChallenge extends Component {
             placeholder={'enter your difficulty'}
             onChange={this.handleChallengeInput}
             />
+          <Input 
+            name='input'
+            type='input'
+            placeholder={'input'}
+            onChange={this.handleChallengeInput}
+            />
+          <Input 
+            name='output'
+            type='output'
+            placeholder={'output'}
+            onChange={this.handleChallengeInput}
+            />            
           <Button
             backgroundColor="red"
             color="white"
