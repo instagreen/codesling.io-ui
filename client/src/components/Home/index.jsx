@@ -6,11 +6,13 @@ import Button from '../globals/Button';
 import Logo from '../globals/Logo';
 
 import './LandingPage.css';
+import Input from '../globals/forms/Input';
 
 let slingId;
 
 class Home extends Component {
   state = {
+    searchTerm: '',
     allChallenges: [],
     selectedChallenge: {}
    }
@@ -34,6 +36,10 @@ class Home extends Component {
       }
     });
   }
+
+  handleSearchFriend(e) {
+    
+  }
   
   handleAddChallengeClick = () => {
     this.props.history.push('/addChallenge');
@@ -45,6 +51,11 @@ class Home extends Component {
     this.setState({ selectedChallenge: value });
   }
 
+  handleLogOut = () => {
+    localStorage.clear();
+    this.props.history.push('/');
+  }
+
   render() {
     return (
       <div className="landing-page-container">
@@ -52,6 +63,20 @@ class Home extends Component {
           className="landing-page-logo"
         />
         <br />
+        <Input
+            name='title'
+            type='title'
+            placeholder={'find friends'}
+            onChange={(e) => this.setState({ searchTerm: e.target.value })}
+          />
+        <Button
+          backgroundColor="red"
+          color="white"
+          text="Search"
+          onClick={this.handleSearchFriend.bind(this)}
+        />
+        <br/>
+        <br/>
         <select onChange={(e) => this.handleChallengeSelect(e)}>
           {this.state.allChallenges.map(challenge => {
             return (
@@ -77,6 +102,13 @@ class Home extends Component {
           color="white"
           text="Duel"
           onClick={() => this.handleDuelClick()}
+        />
+        <br />
+        <Button
+          backgroundColor="blue"
+          color="white"
+          text="Logout"
+          onClick={() => this.handleLogOut()}
         />
       </div>
     );
