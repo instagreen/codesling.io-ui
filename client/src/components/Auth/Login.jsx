@@ -42,6 +42,7 @@ export default class Login extends Component {
   }
 
   render() {
+    console.log('localStorage', localStorage);
     return (
       <div className="login-form-container">
         <form className="auth-form">
