@@ -7,6 +7,8 @@ import Logo from '../globals/Logo';
 
 import './LandingPage.css';
 import Input from '../globals/forms/Input';
+import FriendsList from '../Friends/FriendsList.jsx';
+import FriendSearch from '../Friends/FriendSearch.jsx'
 
 let slingId;
 
@@ -15,7 +17,12 @@ class Home extends Component {
     searchTerm: '',
     searchResults: [],
     allChallenges: [],
+    friendList: [],
     selectedChallenge: {}
+   }
+
+   componentWillMount() {
+     // get friendList
    }
 
    async componentDidMount() {
@@ -75,6 +82,7 @@ class Home extends Component {
             placeholder={'find friends'}
             onChange={(e) => this.setState({ searchTerm: e.target.value })}
           />
+          {this.state.searchResults.length ? <FriendSearch searchList={this.state.searchResults} /> : null}
         <Button
           backgroundColor="red"
           color="white"
