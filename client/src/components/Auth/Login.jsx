@@ -16,6 +16,12 @@ export default class Login extends Component {
       username: ''
     }
   }
+  componentWillMount() {
+    if(localStorage.token) {
+      console.log('here');
+      this.props.history.push('/home');
+    }
+  }
 
   submitAuthData = async (e) => {
     e.preventDefault();
@@ -42,10 +48,6 @@ export default class Login extends Component {
   }
 
   render() {
-    if(localStorage.token) {
-      this.props.history.push('/home');
-      return null;
-    }
     return (
       <div className="login-form-container">
         <form className="auth-form">
