@@ -15,6 +15,7 @@ class LandingPage extends Component {
   //  }
 
   render() {
+    console.log('this.props from Landing index', this.props);
     return (
       <div className="landing-page-container">
         <Logo
