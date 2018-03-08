@@ -13,6 +13,7 @@ let slingId;
 class Home extends Component {
   state = {
     searchTerm: '',
+    searchResults: [],
     allChallenges: [],
     selectedChallenge: {}
    }
@@ -38,7 +39,12 @@ class Home extends Component {
   }
 
   handleSearchFriend(e) {
-    
+    axios.get(`http://localhost:3396/api/users/getUser/${this.state.searchTerm}`)
+      .then(({ data }) => {
+        this.setState({
+          searchResults: data.rows,
+        });
+      });
   }
   
   handleAddChallengeClick = () => {
