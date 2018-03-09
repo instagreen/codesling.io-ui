@@ -16,12 +16,6 @@ export default class Login extends Component {
       username: ''
     }
   }
-  componentWillMount() {
-    if(localStorage.token) {
-      console.log('here');
-      this.props.history.push('/home');
-    }
-  }
 
   submitAuthData = async (e) => {
     e.preventDefault();
