@@ -5,6 +5,7 @@ import Loading from '../Loading';
 import './Button.css';
 
 const Button = ({
+  disabled,
   loading,
   text,
   color,
@@ -29,6 +30,7 @@ const Button = ({
         className={`${color}-text palette-${backgroundColor} ${!text ? 'no-text' : ''}`}
         onClick={onClick}
         type={type}
+        disabled={disabled}
       >
         {loading ? (
           <Loading color="black" />
