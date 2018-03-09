@@ -34,15 +34,26 @@ class FriendListEntry extends React.Component {
       });
   }
 
+  handleChallenge() {
+    console.log(`clicked challenge for ${this.props.user.username}`);
+  }
+
   render() {
     return (
       <li>
         <strong><em href="#">{this.props.user.username}</em></strong>
-        {this.state.isFriend ? null : 
+        {this.state.isFriend ? 
+        <Button
+          backgroundColor="green"
+          color="white"
+          text="challenge"
+          onClick={this.handleChallenge.bind(this)}
+          disabled={this.state.isDisabled}
+        /> : 
         <Button
           backgroundColor={this.state.backgroundColor}
           color="white"
-          text="Add"
+          text="Add friend"
           onClick={this.handleAddFriend.bind(this)}
           disabled={this.state.isDisabled}
         />}
