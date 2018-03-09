@@ -21,8 +21,10 @@ class Home extends Component {
     selectedChallenge: {}
    }
 
-   componentWillMount() {
+   async componentWillMount() {
      // get friendList
+     const { data } = await axios.get(`http://localhost:3396/api/friends/fetchAllFriends/${localStorage.id}/`);
+     this.setState({ friendList: data });
    }
 
    async componentDidMount() {
@@ -72,7 +74,7 @@ class Home extends Component {
     localStorage.clear();
     this.props.history.push('/');
   }
-
+  
   render() {
     return (
       <div className="landing-page-container">
