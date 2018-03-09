@@ -1,29 +1,53 @@
 import React from 'react';
+import Button from '../globals/Button';
+import axios from 'axios';
 
 class FriendListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFollowing: false,
+      isFriend: false,
+      backgroundColor: 'red',
+      isDisabled: false,
     }
   }
 
   componentWillMount() {
-    // check if 'friend' is a follower of the user
-      // set this.state.isFollowing to true
+      axios.get(`http://localhost:3396/api/friends/fetchAllFriends/${localStorage.id}`)
+        .then((data) => {
+          data.data.filter((user) => user.id === this.props.user.id).length ? 
+          this.setState({ isFriend: true }) : null;
+        });
   }
 
   handleAddFriend() {
-    console.log('Add friend button clicked');
+    axios.post('http://localhost:3396/api/friends/addFriend', {
+      user_id: localStorage.id,
+      friend_id: this.props.user.id,
+    })
+      .then((data) => {
+        this.setState({
+          isDisabled: true,
+          isFriend: true,
+        });
+        console.log('Success: ', data);
+      });
   }
 
   render() {
     return (
       <li>
-        <em href="#">{this.props.user.username}</em>
-        {this.state.isFollowing ? null : <button onClick={this.handleAddFriend.bind(this)}>Add Friend</button>}
+        <strong><em href="#">{this.props.user.username}</em></strong>
+        {this.state.isFriend ? null : 
+        <Button
+          backgroundColor={this.state.backgroundColor}
+          color="white"
+          text="Add"
+          onClick={this.handleAddFriend.bind(this)}
+          disabled={this.state.isDisabled}
+        />}
       </li>
-    )
+    );
   }
 }
 

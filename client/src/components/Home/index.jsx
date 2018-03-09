@@ -46,12 +46,16 @@ class Home extends Component {
   }
 
   handleSearchFriend(e) {
-    axios.get(`http://localhost:3396/api/users/getUser/${this.state.searchTerm}`)
-      .then(({ data }) => {
-        this.setState({
-          searchResults: data.rows,
+    if(this.state.searchTerm) {
+      axios.get(`http://localhost:3396/api/users/getUser/${this.state.searchTerm}`)
+        .then(({ data }) => {
+          this.setState({
+            searchResults: data.rows,
+          });
         });
-      });
+    } else {
+      this.setState({ searchResults: []});
+    }
   }
   
   handleAddChallengeClick = () => {
@@ -82,13 +86,13 @@ class Home extends Component {
             placeholder={'find friends'}
             onChange={(e) => this.setState({ searchTerm: e.target.value })}
           />
-          {this.state.searchResults.length ? <FriendSearch searchList={this.state.searchResults} /> : null}
         <Button
           backgroundColor="red"
           color="white"
           text="Search"
           onClick={this.handleSearchFriend.bind(this)}
         />
+        {this.state.searchResults.length ? <FriendSearch searchList={this.state.searchResults} /> : null}
         <br/>
         <br/>
         <select onChange={(e) => this.handleChallengeSelect(e)}>
