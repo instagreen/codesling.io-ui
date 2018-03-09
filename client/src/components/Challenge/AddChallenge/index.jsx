@@ -33,13 +33,15 @@ class AddChallenge extends Component {
       user_id: id,
       type: 0
     }
+    const result = await axios.post('http://localhost:3396/api/challenges', body);
+    console.log('req.body',result);
+
     const bodyTestCase = {
       content,
-      challenge_id: id,
+      challenge_id: result.data.id,
       input,
       output
     }
-    const result = await axios.post('http://localhost:3396/api/challenges', body);
     const postTestCase = await axios.post('http://localhost:3396/api/testCases', bodyTestCase);
     
     this.props.history.push('/home');

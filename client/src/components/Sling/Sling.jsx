@@ -58,11 +58,22 @@ class Sling extends Component {
     window.addEventListener('resize', this.setEditorSize);
   }
 
-  submitCode = () => {
+  submitCode = async () => {
     const { socket } = this.props;
     const { ownerText } = this.state;
     const email = localStorage.getItem('email');
-    socket.emit('client.run', { text: ownerText, email });
+    const id = this.state.challenge.id;
+    
+    socket.emit('client.run', { text: ownerText, email, id }); //added id
+    
+    // Brian Testing
+    console.log('---ownerText, type', ownerText, typeof ownerText);
+    try {
+      const data = await axios.get(`http://localhost:3396/api/slingSubmit`);
+      console.log('data from await axios', data);
+    } catch (err) {
+      console.log('err from Sling', err);
+    }
   }
 
   handleChange = throttle((editor, metadata, value) => {
