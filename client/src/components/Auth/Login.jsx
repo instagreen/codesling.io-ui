@@ -42,10 +42,6 @@ export default class Login extends Component {
   }
 
   render() {
-    if(localStorage.token) {
-      this.props.history.push('/home');
-      return null;
-    }
     return (
       <div className="login-form-container">
         <form className="auth-form">
