@@ -8,7 +8,9 @@
 
 .login-form-container,
 .signup-form-container {
-  width: 100%; }
+  width: 100%; 
+  text-align: center;
+}
 
 .auth-form {
   margin: auto;

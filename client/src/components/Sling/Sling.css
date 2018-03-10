@@ -32,7 +32,9 @@
   grid-area: header; }
 
 .run-btn {
-  margin: 30px; }
+  margin: 30px;
+  text-align: center; 
+}
 
 .stdout {
   min-height: 100px;

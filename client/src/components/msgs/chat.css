@@ -1,0 +1,15 @@
+.hidden-element {
+  opacity: 0;
+  -webkit-transition: opacity 1s linear; /* Safari */
+  transition: opacity 1s linear;
+}
+
+.visible-element {
+  opacity: 1;
+  -webkit-transition: opacity 1s linear; /* Safari */
+  transition: opacity 1s linear;
+}
+
+.chat-container {
+  margin-top: 50%;
+}
