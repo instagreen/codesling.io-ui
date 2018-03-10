@@ -7,7 +7,7 @@ const FriendsList = (props) => (
     <select size="5">
       {props.friends.map((friend) => <FriendListEntry key={friend.id} user={friend}/>)}
     </select>
-  </select>
+  </div>
 );
 
 export default FriendsList;
