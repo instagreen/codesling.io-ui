@@ -2,6 +2,8 @@ import React from 'react';
 import Button from '../globals/Button';
 import axios from 'axios';
 
+import './Friend.css';
+
 class FriendListEntry extends React.Component {
   constructor(props) {
     super(props);
@@ -13,11 +15,16 @@ class FriendListEntry extends React.Component {
   }
 
   componentWillMount() {
-      axios.get(`http://localhost:3396/api/friends/fetchAllFriends/${localStorage.id}`)
-        .then((data) => {
-          data.data.filter((user) => user.id === this.props.user.id).length ? 
-          this.setState({ isFriend: true }) : null;
-        });
+    this.setFriendsList();
+  }
+
+  setFriendsList() {
+    console.log('getting friends list');
+    axios.get(`http://localhost:3396/api/friends/fetchAllFriends/${localStorage.id}`)
+      .then((data) => {
+        data.data.filter((user) => user.id === this.props.user.id).length ? 
+        this.setState({ isFriend: true }) : null;
+    });
   }
 
   handleAddFriend() {
@@ -30,7 +37,7 @@ class FriendListEntry extends React.Component {
           isDisabled: true,
           isFriend: true,
         });
-        console.log('Success: ', data);
+        this.setFriendsList();
       });
   }
 
@@ -40,24 +47,12 @@ class FriendListEntry extends React.Component {
 
   render() {
     return (
-      <li>
+      <option
+        className={this.state.isFriend ? "friend" : "notFriend"}
+        onDoubleClick={this.state.isFriend ? this.handleChallenge.bind(this) : this.handleAddFriend.bind(this)}
+      >
         <strong><em href="#">{this.props.user.username}</em></strong>
-        {this.state.isFriend ? 
-        <Button
-          backgroundColor="green"
-          color="white"
-          text="challenge"
-          onClick={this.handleChallenge.bind(this)}
-          disabled={this.state.isDisabled}
-        /> : 
-        <Button
-          backgroundColor={this.state.backgroundColor}
-          color="white"
-          text="Add friend"
-          onClick={this.handleAddFriend.bind(this)}
-          disabled={this.state.isDisabled}
-        />}
-      </li>
+      </option>
     );
   }
 }

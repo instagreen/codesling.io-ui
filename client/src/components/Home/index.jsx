@@ -18,6 +18,7 @@ class Home extends Component {
     searchResults: [],
     allChallenges: [],
     friendList: [],
+    renderFriendsList: false,
     selectedChallenge: {}
    }
 
@@ -124,6 +125,14 @@ class Home extends Component {
           onClick={() => this.handleDuelClick()}
         />
         <br />
+        <Button
+          backgroundColor="red"
+          color="white"
+          text="friends"
+          onClick={() => this.setState({ renderFriendsList: !this.state.renderFriendsList})}
+          />
+          {this.state.renderFriendsList ? <FriendsList friends={this.state.friendList}/> : null}
+        <br/>
         <Button
           backgroundColor="blue"
           color="white"
